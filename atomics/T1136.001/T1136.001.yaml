@@ -134,3 +134,16 @@ atomic_tests:
       net user /del "#{username}" >nul 2>&1
     name: command_prompt
     elevation_required: true
+- name: Create an "ANONYMOUS LOGON" account in a command prompt with extra characters
+  description: |
+    Creates a new user in a command prompt. Upon execution, "The command completed successfully." will be displayed. To verify the
+    new account, run "net user" in powershell or CMD and observe that there is a new user named "ANONYMOUS  LOGON"
+  supported_platforms:
+  - windows
+  executor:
+    command: |
+      net user /add "ANONYMOUS  LOGON" "Passw0rd!123"
+    cleanup_command: |
+      net user /del "ANONYMOUS  LOGON" >nul 2>&1
+    name: command_prompt
+    elevation_required: true
